@@ -1,0 +1,664 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #ff0080, #8000ff, #0080ff);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: white;
+    min-height: 100vh;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    z-index: 0;
+    animation: float 20s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-30px, -30px) rotate(360deg); }
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+header h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+    font-size: 2.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #ffeb3b;
+    text-shadow: 0 0 15px #ff0080, 0 0 30px #ff0080;
+    margin-bottom: 15px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
+
+.countdown {
+    background: rgba(255, 0, 128, 0.9);
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.3rem;
+    box-shadow: 0 5px 15px rgba(255, 0, 128, 0.5);
+}
+
+#timer {
+    font-weight: 900;
+    color: #ffeb3b;
+    font-size: 1.5rem;
+}
+
+.game-section {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    border: 3px solid #ff0080;
+    position: relative;
+    z-index: 1;
+}
+
+.wheel-container {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    margin: 0 auto 30px;
+}
+
+.wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    transition: transform 5s cubic-bezier(0.17, 0.67, 0.21, 0.99);
+    border: 8px solid #ffeb3b;
+    box-shadow: 0 0 30px rgba(255, 235, 59, 0.7);
+}
+
+.wheel-center {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #ff0080;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    border: 5px solid white;
+}
+
+.spin-pointer {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 60px;
+    background: #ffeb3b;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    z-index: 20;
+    filter: drop-shadow(0 0 5px rgba(255, 235, 59, 0.9));
+}
+
+.spin-btn {
+    background: linear-gradient(to right, #ff0080, #8000ff);
+    color: white;
+    border: none;
+    padding: 20px 50px;
+    font-size: 1.8rem;
+    font-weight: 900;
+    border-radius: 60px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: all 0.3s;
+    box-shadow: 0 10px 25px rgba(255, 0, 128, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.spin-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(255, 0, 128, 0.7);
+}
+
+.spin-btn:active {
+    transform: scale(0.98);
+}
+
+.spins-left {
+    font-size: 1.2rem;
+    color: #ffeb3b;
+}
+
+#spins-count {
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+
+.prize-display {
+    background: rgba(0, 128, 255, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 25px;
+    border: 3px dashed #ffeb3b;
+}
+
+.prize-display h2 {
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+#prize-text {
+    color: #ffeb3b;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.prize-icon {
+    font-size: 4rem;
+    color: #ffeb3b;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.clickbait-section {
+    background: rgba(128, 0, 255, 0.8);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.clickbait-section h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #ffeb3b;
+    text-align: center;
+}
+
+.urgency-text {
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.highlight {
+    color: #ffeb3b;
+    font-weight: 900;
+    font-size: 1.6rem;
+    text-shadow: 0 0 10px #ff0080;
+}
+
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.action-btn {
+    padding: 18px 30px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 250px;
+}
+
+.claim-btn {
+    background: linear-gradient(to right, #00ff80, #00cc66);
+    color: #003311;
+}
+
+.share-btn {
+    background: linear-gradient(to right, #0080ff, #0066cc);
+    color: white;
+}
+
+.bonus-btn {
+    background: linear-gradient(to right, #ff8000, #cc6600);
+    color: white;
+}
+
+.action-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.more-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.extra-btn {
+    padding: 15px 25px;
+    background: rgba(255, 235, 59, 0.9);
+    color: #333;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.extra-btn:hover {
+    background: #ffeb3b;
+    transform: scale(1.05);
+}
+
+.testimonial {
+    background: rgba(255, 255, 255, 0.1);
+    border-left: 5px solid #ffeb3b;
+    padding: 20px;
+    border-radius: 0 15px 15px 0;
+    font-style: italic;
+    margin-top: 20px;
+}
+
+.testimonial-author {
+    text-align: right;
+    font-weight: 600;
+    color: #ffeb3b;
+    margin-top: 10px;
+}
+
+.prize-list {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.prize-list h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #ffeb3b;
+    text-align: center;
+}
+
+.prizes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.prize-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.prize-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.prize-item.selected {
+    background: rgba(255, 235, 59, 0.3);
+    border: 2px solid #ffeb3b;
+}
+
+.prize-icon-small {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #ffeb3b;
+}
+
+.prize-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+footer {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    position: relative;
+    z-index: 1;
+}
+
+.disclaimer {
+    font-size: 0.8rem;
+    margin-top: 10px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #ff0080, #8000ff);
+    padding: 40px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    border: 5px solid #ffeb3b;
+    box-shadow: 0 0 50px rgba(255, 235, 59, 0.7);
+    position: relative;
+    animation: modalAppear 0.5s;
+}
+
+@keyframes modalAppear {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+}
+
+.modal h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ffeb3b;
+}
+
+.modal-prize {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #ffeb3b;
+    margin: 20px 0;
+    text-transform: uppercase;
+}
+
+.modal-btn {
+    padding: 18px 40px;
+    font-size: 1.5rem;
+    font-weight: 900;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.3s;
+}
+
+.modal-btn:hover {
+    transform: scale(1.05);
+}
+
+#claim-now-btn {
+    background: linear-gradient(to right, #00ff80, #00cc66);
+    color: #003311;
+}
+
+.secondary-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .wheel-container {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .spin-btn {
+        padding: 15px 30px;
+        font-size: 1.5rem;
+    }
+    
+    .action-btn {
+        min-width: 100%;
+    }
+    
+    .prizes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+    
+    header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .wheel-container {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+/* ===== PRIZE IMAGE STYLES ===== */
+
+/* Prize Image Styles for Wheel */
+.wheel-prize-img {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wheel-prize-name {
+    font-size: 10px;
+    line-height: 1.1;
+    padding: 0 5px;
+}
+
+/* Prize Images for List */
+.prize-img-container {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.prize-item:hover .prize-img-container {
+    transform: scale(1.2);
+}
+
+/* Won Prize Display */
+.won-prize-img {
+    font-size: 5rem;
+    animation: bounce 2s infinite;
+}
+
+/* Modal Prize Image */
+.modal-prize-img {
+    font-size: 6rem;
+    color: #ffeb3b;
+    margin: 20px 0;
+    animation: bounce 2s infinite;
+}
+
+/* Specific prize image styles */
+.phone-img i {
+    color: #007AFF;
+    text-shadow: 0 0 10px rgba(0, 122, 255, 0.5);
+}
+
+.laptop-img i {
+    color: #555555;
+    text-shadow: 0 0 10px rgba(85, 85, 85, 0.5);
+}
+
+.card-img i {
+    color: #FF9500;
+    text-shadow: 0 0 10px rgba(255, 149, 0, 0.5);
+}
+
+.gamepad-img i {
+    color: #003087;
+    text-shadow: 0 0 10px rgba(0, 48, 135, 0.5);
+}
+
+.headphone-img i {
+    color: #A2AAAD;
+    text-shadow: 0 0 10px rgba(162, 170, 173, 0.5);
+}
+
+.shoe-img i {
+    color: #DD052B;
+    text-shadow: 0 0 10px rgba(221, 5, 43, 0.5);
+}
+
+.drone-img i {
+    color: #000000;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.watch-img i {
+    color: #0F0F0F;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.netflix-img i {
+    color: #E50914;
+    text-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+}
+
+.camera-img i {
+    color: #00B3FF;
+    text-shadow: 0 0 10px rgba(0, 179, 255, 0.5);
+}
+
+.echo-img i {
+    color: #00BFFF;
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
+.sad-img i {
+    color: #888888;
+    text-shadow: 0 0 10px rgba(136, 136, 136, 0.5);
+}
+
+/* Make the wheel prize images larger on hover */
+.wheel-segment:hover .wheel-prize-img {
+    transform: scale(1.3);
+    transition: transform 0.3s;
+}
+
+/* Responsive adjustments for prize images */
+@media (max-width: 768px) {
+    .wheel-prize-img {
+        font-size: 1.5rem;
+        height: 30px;
+    }
+    
+    .wheel-prize-name {
+        font-size: 8px;
+    }
+    
+    .prize-img-container {
+        font-size: 2rem;
+        height: 50px;
+    }
+    
+    .won-prize-img {
+        font-size: 4rem;
+    }
+    
+    .modal-prize-img {
+        font-size: 4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .wheel-prize-img {
+        font-size: 1.2rem;
+    }
+    
+    .prize-img-container {
+        font-size: 1.5rem;
+    }
+}
